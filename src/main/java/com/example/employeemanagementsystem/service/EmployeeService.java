@@ -71,7 +71,7 @@ public class EmployeeService {
         addLanguageIfNotExists("English");
         addLanguageIfNotExists("Spanish");
 
-        // Create default users
+
 //        createDefaultUser("STAFF", "STAFF", "newstaff@example.com", "NewStaff", "User", "Office", "IND", "Kerala", "Malappuram", "IT", "Software Engineer", "Junior", List.of("English"));
         createDefaultUser("ADMIN", "ADMIN", "admin@example.com", "Admin", "User", "Headquarters", "USA", "California", "San Francisco", "PT", "Sports Engineer", "Senior", List.of("English", "Spanish"));
     }
@@ -142,7 +142,7 @@ public class EmployeeService {
 
     private void createDefaultUser(String roleName, String password, String email, String firstName, String lastName, String place, String countryName, String stateName, String cityName, String departmentName, String designationName, String gradeName, List<String> languages) {
         if (employeeRepository.existsByEmail(email)) {
-            return; // Skip creation if the user already exists
+            return;
         }
 
         Role role = roleRepository.findByName(roleName)
@@ -177,10 +177,10 @@ public class EmployeeService {
         employeeDTO.setGrade(grade.getName());
         employeeDTO.setLanguages(languages);
         employeeDTO.setEmail(email);
-        employeeDTO.setPhone("123-456-7890"); // Placeholder phone number; adjust as needed
+        employeeDTO.setPhone("123-456-7890");
         employeeDTO.setPassword(password);
 
-        createEmployee(employeeDTO); // Use your existing createEmployee method
+        createEmployee(employeeDTO);
     }
     @Cacheable(value = "employees")
     public Page<EmployeeDTO> getAllEmployees(Specification<Employee> spec, Pageable pageable) {
